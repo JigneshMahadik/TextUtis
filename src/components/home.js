@@ -1,13 +1,45 @@
-import { Navbar } from "./navbar";
+import { Navbar, darkModeContext } from "./navbar";
 import "./style.css"
-import { useState } from "react"
+import { useContext, useEffect, useState } from "react"
+import {ThemeContext} from '../context/ThemeContext';
 
 export function Home(){
 
     const [text, setText] = useState("");
     const [chars, setChars] = useState(0);
     const [words, setWords] = useState(0);
-    const [preview, setPreview] = useState([]);
+    // const [preview, setPreview] = useState([]);
+
+    const {darkMode} = useContext(ThemeContext);
+    // const darkMode = useContext(darkModeContext);
+    console.log("Jack",darkMode);
+    
+    useEffect(()=>{
+        if(darkMode && darkMode !== null){
+            // Light Mode
+            // Default false
+            document.getElementById("text-area").style.backgroundColor = "white";
+            document.getElementById("text-area").style.backgroundColor = "white";
+            document.getElementById("input-title").style.color = "black";
+            document.getElementById("main-cont").style.backgroundColor = "white";
+            document.getElementById("title").style.color = "black";
+            document.getElementById("textarea-input").style.backgroundColor = "white";
+            document.getElementById("textarea-input").style.color = "black";
+            document.getElementById("summary-title").style.color = "black";
+            // document.getElementById("summary-title").style.backgroundColor = "white";
+        }
+        else{
+            // Dark Mode
+            // Default true
+            document.getElementById("text-area").style.backgroundColor = "rgb(33,37,41,1)";
+            document.getElementById("input-title").style.color = "white";
+            document.getElementById("main-cont").style.backgroundColor = "rgb(33,37,41,1)";
+            document.getElementById("title").style.color = "white";
+            document.getElementById("textarea-input").style.backgroundColor = "rgb(33,37,41,1)";
+            document.getElementById("textarea-input").style.color = "white";
+            document.getElementById("summary-title").style.color = "white";
+        }
+    })
 
     function handleUpperCase(){
         let input = document.getElementById("textarea-input").value;
@@ -38,7 +70,7 @@ export function Home(){
         setWords(wordsVal.length);
 
         // To show preview of document
-        setPreview(wordsVal);
+        // setPreview(wordsVal);
     }
     function removeSpaces(){
         let txt = document.getElementById("textarea-input").value;
@@ -51,7 +83,7 @@ export function Home(){
     }
 
     return(
-        <div>
+        <div id="main-cont">
             <Navbar/>
             <h1 id="title">TextUtis - Word Counter, Charecter Counter, Remove Extra Space</h1>
             <div id="text-area">

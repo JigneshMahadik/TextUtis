@@ -12,6 +12,11 @@
     cursor: pointer;
     color:#000000;
 }
+#home ,#about, #contact{
+    color: black;
+    text-decoration: none;
+    font-weight: 700;
+}
 #right-cont{
     width: 50%;
     /* background-color: aquamarine; */
